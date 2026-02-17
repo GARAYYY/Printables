@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Mi Galería STL</title>
-
     <style>
         body {
             margin: 0;
@@ -45,11 +44,8 @@
 </head>
 
 <body>
-
     <h1>Mis Piezas 3D</h1>
-
     <div class="grid">
-
         <div class="card">
             <div id="viewer1" class="viewer"></div>
             <h2>Sujeta Latas</h2>
@@ -57,76 +53,49 @@
             <p>Filamento: 28g</p>
             <a href="./piezas/bolis.html">Ver detalles</a>
         </div>
-
     </div>
 
     <script type="module">
-
         import * as THREE from "https://esm.sh/three@0.158.0";
         import { STLLoader } from "https://esm.sh/three@0.158.0/examples/jsm/loaders/STLLoader.js";
-
         const container = document.getElementById("viewer1");
-
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x111111);
-
         const camera = new THREE.PerspectiveCamera(
             75,
             container.clientWidth / container.clientHeight,
             0.1,
             5000
         );
-
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
-
         const light = new THREE.DirectionalLight(0xffffff, 1);
         light.position.set(1, 1, 1);
         scene.add(light);
-
         scene.add(new THREE.AmbientLight(0x404040));
-
         const loader = new STLLoader();
-
         loader.load("stl/bolis.stl", function (geometry) {
-
             geometry.center();
-
             const material = new THREE.MeshStandardMaterial({ color: 0x4da6ff });
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
-
-            // Auto-zoom inteligente
             const box = new THREE.Box3().setFromObject(mesh);
             const size = box.getSize(new THREE.Vector3());
             const center = box.getCenter(new THREE.Vector3());
-
-            // Mover objeto al centro real
             mesh.position.sub(center);
-
-            // Distancia proporcional al tamaño
             const maxDim = Math.max(size.x, size.y, size.z);
             const distance = maxDim * 1;
-
-            // Vista desde esquina XYZ
             camera.position.set(distance, distance, distance);
             camera.lookAt(0, 0, 0);
-
             function animate() {
                 requestAnimationFrame(animate);
-
                 mesh.rotation.y += 0.005;
-
                 renderer.render(scene, camera);
             }
-
             animate();
         });
-
     </script>
-
-
 </body>
 
 </html>

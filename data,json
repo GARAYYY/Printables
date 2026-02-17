@@ -1,0 +1,9 @@
+[
+    {
+        "id": "bolis",
+        "nombre": "Sujeta Latas",
+        "archivoSTL": "stl/bolis.stl",
+        "tiempo": "8h 35m",
+        "filamento": "28g"
+    }
+]
