@@ -1,0 +1,16 @@
+const piezas = [
+    {
+        nombre: "Posa Latas + Boligrados",
+        archivo: "stl/bolis.stl",
+        tiempo: "2h 35m",
+        filamento: "28g",
+        pagina: "piezas/bolis.html"
+    },
+    {
+        nombre: "Clip para Cables",
+        archivo: "stl/clip.stl",
+        tiempo: "5h 10m",
+        filamento: "74g",
+        pagina: "piezas/clip.html"
+    }
+];
